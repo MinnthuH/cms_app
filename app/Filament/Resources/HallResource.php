@@ -23,7 +23,20 @@ class HallResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('cinema_id')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Toggle::make('is_3d')
+                    ->required(),
+                Forms\Components\TextInput::make('total_seats')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('description')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -31,7 +44,26 @@ class HallResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('cinema_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\IconColumn::make('is_3d')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('total_seats')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('description')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
